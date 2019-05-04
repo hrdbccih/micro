@@ -1,0 +1,263 @@
+{% extends 'biao/base.html' %}
+
+
+
+{% block mdrs %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+<div class="container-fluid songs-container">
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(function() {
+         esbl();
+         mrsa();
+         kpc();
+      });
+
+      function esbl() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Isolados');
+      data.addColumn('number', 'ESBL');
+      data.addColumn({type: 'string', role: 'annotation'});
+
+
+      data.addRows([
+        {% for mes in esbl %}
+        ['{{ mes.0 }}', {{ mes.1 }}, '{{ mes.1 }}'],
+        {% endfor %}
+        ]);
+
+      var options = {
+        title: 'ESBL',
+        titleTextStyle: {
+            fontSize: 40,
+            color: 'black',
+            auraColor: 'none'
+            },
+            colors:['purple'],
+            height: 600,
+            width: 1500,
+        legend: 'none',
+        annotations: {
+          alwaysOutside: true,
+          textStyle: {
+            fontSize: 14,
+            color: '#000',
+            auraColor: 'none'
+          }
+        },
+        hAxis: {
+          direction:-1,
+          slantedText:true,
+          slantedTextAngle:90,
+          titleTextStyle: {
+            fontSize: 25,
+            color: 'black',
+            bold: true,
+            italic: false
+          }
+
+
+        },
+        vAxis: {
+          title: 'Isolados',
+          textStyle: {
+            fontSize: 20,
+            bold: false,
+            italic: false
+            },
+            titleTextStyle: {
+            fontSize: 25,
+            color: 'black',
+            bold: true,
+            italic: false
+            },
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:10,
+              min:0
+            }
+
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('esbl_div'));
+      chart.draw(data, options);
+    }
+
+
+
+
+
+
+
+
+    function mrsa() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Isolados');
+      data.addColumn('number', 'MRSA');
+      data.addColumn({type: 'string', role: 'annotation'});
+
+
+      data.addRows([
+        {% for mes in mrsa %}
+        ['{{ mes.0 }}', {{ mes.1 }}, '{{ mes.1 }}'],
+        {% endfor %}
+        ]);
+
+      var options = {
+        title: 'MRSA',
+        titleTextStyle: {
+            fontSize: 40,
+            color: 'black',
+            auraColor: 'none'
+            },
+            colors:['red'],
+            height: 600,
+            width: 1500,
+        legend: 'none',
+        annotations: {
+          alwaysOutside: true,
+          textStyle: {
+            fontSize: 14,
+            color: '#000',
+            auraColor: 'none'
+          }
+        },
+        hAxis: {
+          direction:-1,
+          slantedText:true,
+          slantedTextAngle:90,
+          titleTextStyle: {
+            fontSize: 25,
+            color: 'black',
+            bold: true,
+            italic: false
+          }
+
+
+        },
+        vAxis: {
+          title: 'Isolados',
+          textStyle: {
+            fontSize: 20,
+            bold: false,
+            italic: false
+            },
+            titleTextStyle: {
+            fontSize: 25,
+            color: 'black',
+            bold: true,
+            italic: false
+            },
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:10,
+              min:0
+            }
+
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('mrsa_div'));
+      chart.draw(data, options);
+    }
+
+
+
+
+
+
+    function kpc() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Isolados');
+      data.addColumn('number', 'KPC');
+      data.addColumn({type: 'string', role: 'annotation'});
+
+
+      data.addRows([
+        {% for mes in kpc %}
+        ['{{ mes.0 }}', {{ mes.1 }}, '{{ mes.1 }}'],
+        {% endfor %}
+        ]);
+
+      var options = {
+        title: 'KPC',
+        titleTextStyle: {
+            fontSize: 40,
+            color: 'black',
+            auraColor: 'none'
+            },
+            colors:['green'],
+            height: 600,
+            width: 1500,
+        legend: 'none',
+        annotations: {
+          alwaysOutside: true,
+          textStyle: {
+            fontSize: 14,
+            color: '#000',
+            auraColor: 'none'
+          }
+        },
+        hAxis: {
+          direction:-1,
+          slantedText:true,
+          slantedTextAngle:90,
+          titleTextStyle: {
+            fontSize: 25,
+            color: 'black',
+            bold: true,
+            italic: false
+          }
+
+
+        },
+        vAxis: {
+          title: 'Isolados',
+          textStyle: {
+            fontSize: 20,
+            bold: false,
+            italic: false
+            },
+            titleTextStyle: {
+            fontSize: 25,
+            color: 'black',
+            bold: true,
+            italic: false
+            },
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:10,
+              min:0
+            }
+
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('kpc_div'));
+      chart.draw(data, options);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <div id="esbl_div" style="width: 1000px; height: 700px;"></div>
+    <div id="mrsa_div" style="width: 1000px; height: 700px;"></div>
+    <div id="kpc_div" style="width: 1000px; height: 700px;"></div>
+</div>
+{% endblock %}

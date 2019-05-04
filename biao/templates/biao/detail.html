@@ -1,0 +1,106 @@
+{% extends 'biao/base.html' %}
+
+{% block body %}
+    <div class="container-fluid songs-container">
+        <div class="row">
+
+            <!-- Left Album Info -->
+            <div class="col-sm-4 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h1><a href="{% url 'biao:index_filtered' cultura.nome %}">{{ cultura.nome }}</a></h1>
+                        <h2>
+                            {% if cultura.mat_especifico == None %}
+                                {% if cultura.material == 'hemo' %}
+                                    Hemocultura<br>
+                                {% elif cultura.material == 'uro' %}
+                                    Urocultura<br>
+                                {% elif cultura.material == 'cm' %}
+                                    Cultura de Materiais<br>
+                                {% endif %}
+                            {% else %}
+                                {{ cultura.mat_especifico }}<br>
+                            {% endif %}
+                        </h2>
+                        <h3><small>Coleta: {{ cultura.coleta|date:"d/m/Y" }}<br>
+                        Unidade:{{ cultura.unid }}<br>
+                        </h3>
+                    </div>
+                </div>
+                {% load static %}
+
+                <h4><a href="{% static 'biao/pdfs/'|add:cultura.filename|add:'' %}" target="_new">{{ cultura.filename }}</a></h4>
+            </div>
+
+
+
+
+            <!-- Right Song Info -->
+            <div class="col-sm-8 col-md-9">
+
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                    <li class="active"><a href="{% url 'biao:detail' cultura.id %}">{{ cultura.resultado }} (hospital)</a></li>
+                    <li class="active"><a href="{% url 'biao:detail' cultura.id %}">{{ cultura.resultado }} ({{ cultura.unid }})</a></li>
+                    <li class="active"><a href="{% url 'biao:detail' cultura.id %}">{{ cultura.resultado }} ({{ cultura.material }})</a></li>
+                </ul>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <h1>{{ cultura.resultado }} ({{ cultura.testes }})</h1>
+                            <h2>Antibiograma</h2>
+
+                        {% if error_message %}
+                            <p><strong>{{ error_message }}</strong></p>
+                        {% endif %}
+
+                        <table width="300px">
+                            <thead>
+                            <tr>
+                                <th>Antibiótico</th>
+                                <th>Sensibilidade</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if cultura.ami == 's' %}<tr><td>Amicacina                        </td><td>Sensível</td></tr>{% elif cultura.ami == 'r' %}<tr><td><font color="red">Amicacina                        </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.amp == 's' %}<tr><td>Ampilina                         </td><td>Sensível</td></tr>{% elif cultura.amp == 'r' %}<tr><td><font color="red">Ampilina                         </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.asb == 's' %}<tr><td>Ampicilina-sulbactam             </td><td>Sensível</td></tr>{% elif cultura.asb == 'r' %}<tr><td><font color="red">Ampicilina-sulbactam             </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.atm == 's' %}<tr><td>Aztreonam                        </td><td>Sensível</td></tr>{% elif cultura.atm == 'r' %}<tr><td><font color="red">Aztreonam                        </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.caz == 's' %}<tr><td>Ceftazidima                      </td><td>Sensível</td></tr>{% elif cultura.caz == 'r' %}<tr><td><font color="red">Ceftazidima                      </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.cip == 's' %}<tr><td>Ciprofloxacino                   </td><td>Sensível</td></tr>{% elif cultura.cip == 'r' %}<tr><td><font color="red">Ciprofloxacino                   </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.cli == 's' %}<tr><td>Clindamicina                     </td><td>Sensível</td></tr>{% elif cultura.cli == 'r' %}<tr><td><font color="red">Clindamicina                     </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.cpm == 's' %}<tr><td>Cefepime                         </td><td>Sensível</td></tr>{% elif cultura.cpm == 'r' %}<tr><td><font color="red">Cefepime                         </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.cro == 's' %}<tr><td>Ceftriaxone                      </td><td>Sensível</td></tr>{% elif cultura.cro == 'r' %}<tr><td><font color="red">Ceftriaxone                      </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.ctn == 's' %}<tr><td>Cefalotina                       </td><td>Sensível</td></tr>{% elif cultura.ctn == 'r' %}<tr><td><font color="red">Cefalotina                       </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.eri == 's' %}<tr><td>Eritromicina                     </td><td>Sensível</td></tr>{% elif cultura.eri == 'r' %}<tr><td><font color="red">Eritromicina                     </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.ert == 's' %}<tr><td>Ertapenem                        </td><td>Sensível</td></tr>{% elif cultura.ert == 'r' %}<tr><td><font color="red">Ertapenem                        </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.gen == 's' %}<tr><td>Gentamicina                      </td><td>Sensível</td></tr>{% elif cultura.gen == 'r' %}<tr><td><font color="red">Gentamicina                      </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.imi == 's' %}<tr><td>Imipenem                         </td><td>Sensível</td></tr>{% elif cultura.imi == 'r' %}<tr><td><font color="red">Imipenem                         </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.lin == 's' %}<tr><td>Linezolina                       </td><td>Sensível</td></tr>{% elif cultura.lin == 'r' %}<tr><td><font color="red">Linezolina                       </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.mer == 's' %}<tr><td>Meropenem                        </td><td>Sensível</td></tr>{% elif cultura.mer == 'r' %}<tr><td><font color="red">Meropenem                        </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.nit == 's' %}<tr><td>Nitrofurantoina                  </td><td>Sensível</td></tr>{% elif cultura.nit == 'r' %}<tr><td><font color="red">Nitrofurantoina                  </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.nor == 's' %}<tr><td>Norfloxacino                     </td><td>Sensível</td></tr>{% elif cultura.nor == 'r' %}<tr><td><font color="red">Norfloxacino                     </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.oxa == 's' %}<tr><td>Oxacilina                        </td><td>Sensível</td></tr>{% elif cultura.oxa == 'r' %}<tr><td><font color="red">Oxacilina                        </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.pen == 's' %}<tr><td>Penicilina                       </td><td>Sensível</td></tr>{% elif cultura.pen == 'r' %}<tr><td><font color="red">Penicilina                       </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.pol == 's' %}<tr><td>Polimixina                       </td><td>Sensível</td></tr>{% elif cultura.pol == 'r' %}<tr><td><font color="red">Polimixina                       </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.ppt == 's' %}<tr><td>Piperacilina-tazobactam          </td><td>Sensível</td></tr>{% elif cultura.ppt == 'r' %}<tr><td><font color="red">Piperacilina-tazobactam          </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.str == 's' %}<tr><td>Estreptomicina                   </td><td>Sensível</td></tr>{% elif cultura.str == 'r' %}<tr><td><font color="red">Estreptomicina                   </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.sut == 's' %}<tr><td>Sulfametoxazol-treimetoprima     </td><td>Sensível</td></tr>{% elif cultura.sut == 'r' %}<tr><td><font color="red">Sulfametoxazol-treimetoprima     </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.tei == 's' %}<tr><td>Teicoplanina                     </td><td>Sensível</td></tr>{% elif cultura.tei == 'r' %}<tr><td><font color="red">Teicoplanina                     </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.tet == 's' %}<tr><td>Tetraciclina                     </td><td>Sensível</td></tr>{% elif cultura.tet == 'r' %}<tr><td><font color="red">Tetraciclina                     </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            {% if cultura.van == 's' %}<tr><td>Vancomicina                      </td><td>Sensível</td></tr>{% elif cultura.van == 'r' %}<tr><td><font color="red">Vancomicina                      </font></td><td><font color="red">Resistente</font></td></tr>{% endif %}
+                            </tbody>
+
+                        <le>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'biao/base.html' %}
+
+
+
+{% block culturas %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="albums-container container-fluid">
+    <div class="row col-sm-12">
+        <div class="form-group">
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+
+                <!-- TABELA -->
+                <table class="table table-bordered">
+
+                    <!--cabeçalho da tabela-->
+                    <thead>
+                        <tr><form class="navbar-form navbar-left" role="search" method="get" action="{% url 'biao:index' %}">
+                            <th>id</th>
+                            <th>envio</th>
+                            <th>coleta</th>
+                            <th>PDF</th>
+                            <th>nome</th>
+                            <th>unid</th>
+                            <th>material</th>
+                            <th>mat_especifico</th>
+                            <th>resultado</th>
+                            <th>Testes</th>
+                            <!--Reset da pagina, ou seja, dos filtros -->
+                            <th><button type="submit" class="btn btn=default">Limpar filtros</button></th></form>
+                        </tr>
+                    </thead>
+
+                    <!--corpo da tabela-->
+                    <tbody>
+
+                        <!--linha de filtros da tabela-->
+                        <tr><form class="navbar-form navbar-left" role="search" method="get" action="{% url 'biao:index' %}">
+                            <td>
+                            {% if id_order == 'on' %}
+                                <input type="checkbox" id="id_order" name="id_order" checked><label for="id_order">ID Order</label>
+                            {% else %}
+                                <input type="checkbox" id="id_order" name="id_order"><label for="id_order">ID Order</label>
+                            {% endif %}
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><input type="text" class="form-control" name="q" value="{{ nome }}" autocomplete="off"></td>
+                            <td></td>
+                            <td><input type="text" class="form-control" name="u" value="{{ material }}" autocomplete="off"></td>
+                            <td><input type="text" class="form-control" name="v" value="{{ mat_especifico }}" autocomplete="off"></td>
+                            <td><input type="text" class="form-control" name="r" value="{{ resultado }}" autocomplete="off">
+                            {% if positivas == 'on' %}
+                                <input type="checkbox" id="positivas" name="positivas" checked><label for="positivas">Positivas</label>
+                            {% else %}
+                                <input type="checkbox" id="positivas" name="positivas"><label for="positivas">Positivas</label>
+                            {% endif %}
+                            </td>
+                            <td></td>
+                            <td><button type="submit" class="btn btn=default">Aplicar filtros</button></td>
+                            </form>
+                        </tr>
+                        {% for cultura in todas_culturas %}
+
+                        <!--'for' que preenche as linhas da tabela-->
+                        <tr>
+
+                            {% if uploader %}
+                                <td>
+                                     <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'uploader:deleter_nav' %}">
+                                        <button type="submit" class="btn btn=default" name="p" value="{{ cultura.id }}">{{ cultura.id }}</button>
+                                    </form>
+                                </td>
+                            {% else %}
+                                <td>{{ cultura.id }}</td>
+                            {% endif %}
+                            <td>{{ cultura.data|date:"d/m/Y" }}</td>
+                            <td>{{ cultura.coleta|date:"d/m/Y"}}</td>
+                            <td>{% load static %}<a href="{% static 'biao/pdfs/'|add:cultura.filename|add:'' %}" target="_new">PDF</a></td>
+                            <td><a href="{% url 'biao:index_filtered' cultura.nome %}">{{ cultura.nome }}</a></td>
+                            <td>{{ cultura.unid }}</td>
+                            <td>{{ cultura.material }}</td>
+                            <td>{{ cultura.mat_especifico }}</td>
+                            <td><a href="{% url 'biao:agente' cultura.resultado %}">{{ cultura.resultado }}</a></td>
+                            <td>
+                            {% if cultura.testes != None %}
+                                <a href="{% url 'biao:agente' cultura.resultado %}">{{ cultura.testes }}</a>
+                            {% endif %}
+                            </td>
+                            <td>
+                            {% if cultura.resultado != 'negativa' %}
+                                <a href="{% url 'biao:detail' cultura.id %}" class="btn btn-primary btn-sm" role="button">Antibiograma</a>
+                            {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+
+                <!--PAGINATOR-->
+                {% if todas_culturas.has_other_pages %}
+                    <ul class="pagination">
+                    {% if todas_culturas.has_previous %}
+                        <li><a href="?q={{ nome }}&u={{ material }}&v={{ mat_especifico }}&r={{ resultado }}&positivas={{ positivas }}&id_order={{ id_order }}&page={{ todas_culturas.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in todas_culturas.paginator.page_range %}
+                        {% if todas_culturas.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li><a href="?q={{nome}}&u={{ material }}&v={{ mat_especifico }}&r={{ resultado }}&positivas={{ positivas }}&id_order={{ id_order }}&page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if todas_culturas.has_next %}
+                        <li><a href="?q={{nome}}&u={{ material }}&v={{ mat_especifico }}&r={{ resultado }}&positivas={{ positivas }}&id_order={{ id_order }}&page={{ todas_culturas.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                    </ul>
+                {% endif %}
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+

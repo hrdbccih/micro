@@ -1,0 +1,29 @@
+{% extends 'biao/base.html' %}
+
+
+
+{% block uploader %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+<div class="albums-container container-fluid">
+    <div class="row col-sm-12">
+        <div class="form-group">
+            <h1>Uploader</h1>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>path = 'c:/Users/gianr/PycharmProjects/django3/website/CULTURAS DEFINITIVO.xlsx'</p>
+                <a href="{% url 'uploader:read' %}">read.view</a>
+                <p>Linhas extraídas: {{ var1 }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+

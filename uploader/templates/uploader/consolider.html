@@ -1,0 +1,117 @@
+{% extends 'biao/base.html' %}
+
+
+{% block consolider %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid songs-container">
+    <h1>Consolider</h1>
+    {% if primeira_cult is not None %}
+    <div class="row">
+
+
+        <div class="col-sm-6 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table table-bordered">
+
+                        <tbody>
+                            <tr><td><strong>NOME</strong></td><td colspan="3">{{ primeira_cult.nome }}</td></tr>
+                            <tr><td><strong>FILENAME</strong></td><td>{{ primeira_cult.filename }}</td><td><strong>FALHA</strong></td><td>{{ primeira_cult.falha }}</td></tr>
+                            <tr><td><strong>PRONTUÁRIO</strong></td><td>{{ primeira_cult.prot }}</td><td><strong>UNIDADE</strong></td><td>{{ primeira_cult.unid }}</td></tr>
+                            <tr><td><strong>MÉDICO</strong></td><td colspan="3">{{ primeira_cult.medico }}</td></tr>
+                            <tr><td><strong>DATA</strong></td><td>{{ primeira_cult.data|date:"d/m/Y" }}</td><td><strong>COLETA</strong></td><td>{{ primeira_cult.coleta|date:"d/m/Y"}}</td></tr>
+                            <tr><td><strong>MATERIAL</strong></td><td>{{ primeira_cult.material }}</td><td><strong>CÓPIA</strong></td><td></td></tr>
+                            <tr><td><strong>MAT_ESPECÍFICO</strong></td><td colspan="3">{{ primeira_cult.mat_especifico }}</td></tr>
+                            <tr><td><strong>RESULTADO</strong></td><td>{{ primeira_cult.resultado }}</td><td><strong>MAIS DE 1 PÁGINA</strong></td><td></td></tr>
+                            <tr><td><strong>TIPO</strong></td><td>{{ primeira_cult.tipo }}</td><td><strong>TESTES</strong></td><td>{{ primeira_cult.testes }}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        {% if primeira_cult.ami == 's' %}<tr><td><font color="green">Amicacina                   </font></td></tr>{% elif primeira_cult.ami == 'r' or primeira_cult.ami == 'i' %}<tr><td><font color="red">Amicacina                   </font></td></tr>{% endif %}
+                        {% if primeira_cult.amp == 's' %}<tr><td><font color="green">Ampilina                    </font></td></tr>{% elif primeira_cult.amp == 'r' or primeira_cult.amp == 'i' %}<tr><td><font color="red">Ampilina                    </font></td></tr>{% endif %}
+                        {% if primeira_cult.asb == 's' %}<tr><td><font color="green">Ampicilina-sulbactam        </font></td></tr>{% elif primeira_cult.asb == 'r' or primeira_cult.asb == 'i' %}<tr><td><font color="red">Ampicilina-sulbactam        </font></td></tr>{% endif %}
+                        {% if primeira_cult.atm == 's' %}<tr><td><font color="green">Aztreonam                   </font></td></tr>{% elif primeira_cult.atm == 'r' or primeira_cult.atm == 'i' %}<tr><td><font color="red">Aztreonam                   </font></td></tr>{% endif %}
+                        {% if primeira_cult.caz == 's' %}<tr><td><font color="green">Ceftazidima                 </font></td></tr>{% elif primeira_cult.caz == 'r' or primeira_cult.caz == 'i' %}<tr><td><font color="red">Ceftazidima                 </font></td></tr>{% endif %}
+                        {% if primeira_cult.cip == 's' %}<tr><td><font color="green">Ciprofloxacino              </font></td></tr>{% elif primeira_cult.cip == 'r' or primeira_cult.cip == 'i' %}<tr><td><font color="red">Ciprofloxacino              </font></td></tr>{% endif %}
+                        {% if primeira_cult.cli == 's' %}<tr><td><font color="green">Clindamicina                </font></td></tr>{% elif primeira_cult.cli == 'r' or primeira_cult.cli == 'i' %}<tr><td><font color="red">Clindamicina                </font></td></tr>{% endif %}
+                        {% if primeira_cult.cpm == 's' %}<tr><td><font color="green">Cefepime                    </font></td></tr>{% elif primeira_cult.cpm == 'r' or primeira_cult.cpm == 'i' %}<tr><td><font color="red">Cefepime                    </font></td></tr>{% endif %}
+                        {% if primeira_cult.cro == 's' %}<tr><td><font color="green">Ceftriaxone                 </font></td></tr>{% elif primeira_cult.cro == 'r' or primeira_cult.cro == 'i' %}<tr><td><font color="red">Ceftriaxone                 </font></td></tr>{% endif %}
+                        {% if primeira_cult.ctn == 's' %}<tr><td><font color="green">Cefalotina                  </font></td></tr>{% elif primeira_cult.ctn == 'r' or primeira_cult.ctn == 'i' %}<tr><td><font color="red">Cefalotina                  </font></td></tr>{% endif %}
+                        {% if primeira_cult.eri == 's' %}<tr><td><font color="green">Eritromicina                </font></td></tr>{% elif primeira_cult.eri == 'r' or primeira_cult.eri == 'i' %}<tr><td><font color="red">Eritromicina                </font></td></tr>{% endif %}
+                        {% if primeira_cult.ert == 's' %}<tr><td><font color="green">Ertapenem                   </font></td></tr>{% elif primeira_cult.ert == 'r' or primeira_cult.ert == 'i' %}<tr><td><font color="red">Ertapenem                   </font></td></tr>{% endif %}
+                        {% if primeira_cult.gen == 's' %}<tr><td><font color="green">Gentamicina                 </font></td></tr>{% elif primeira_cult.gen == 'r' or primeira_cult.gen == 'i' %}<tr><td><font color="red">Gentamicina                 </font></td></tr>{% endif %}
+                        {% if primeira_cult.imi == 's' %}<tr><td><font color="green">Imipenem                    </font></td></tr>{% elif primeira_cult.imi == 'r' or primeira_cult.imi == 'i' %}<tr><td><font color="red">Imipenem                    </font></td></tr>{% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-sm-3 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        {% if primeira_cult.lin == 's' %}<tr><td><font color="green">Linezolina                  </font></td></tr>{% elif primeira_cult.lin == 'r' %}<tr><td><font color="red">Linezolina                  </font></td></tr>{% endif %}
+                        {% if primeira_cult.mer == 's' %}<tr><td><font color="green">Meropenem                   </font></td></tr>{% elif primeira_cult.mer == 'r' %}<tr><td><font color="red">Meropenem                   </font></td></tr>{% endif %}
+                        {% if primeira_cult.nit == 's' %}<tr><td><font color="green">Nitrofurantoina             </font></td></tr>{% elif primeira_cult.nit == 'r' %}<tr><td><font color="red">Nitrofurantoina             </font></td></tr>{% endif %}
+                        {% if primeira_cult.nor == 's' %}<tr><td><font color="green">Norfloxacino                </font></td></tr>{% elif primeira_cult.nor == 'r' %}<tr><td><font color="red">Norfloxacino                </font></td></tr>{% endif %}
+                        {% if primeira_cult.oxa == 's' %}<tr><td><font color="green">Oxacilina                   </font></td></tr>{% elif primeira_cult.oxa == 'r' %}<tr><td><font color="red">Oxacilina                   </font></td></tr>{% endif %}
+                        {% if primeira_cult.pen == 's' %}<tr><td><font color="green">Penicilina                  </font></td></tr>{% elif primeira_cult.pen == 'r' %}<tr><td><font color="red">Penicilina                  </font></td></tr>{% endif %}
+                        {% if primeira_cult.pol == 's' %}<tr><td><font color="green">Polimixina                  </font></td></tr>{% elif primeira_cult.pol == 'r' %}<tr><td><font color="red">Polimixina                  </font></td></tr>{% endif %}
+                        {% if primeira_cult.ppt == 's' %}<tr><td><font color="green">Piperacilina-tazobactam     </font></td></tr>{% elif primeira_cult.ppt == 'r' %}<tr><td><font color="red">Piperacilina-tazobactam     </font></td></tr>{% endif %}
+                        {% if primeira_cult.str == 's' %}<tr><td><font color="green">Estreptomicina              </font></td></tr>{% elif primeira_cult.str == 'r' %}<tr><td><font color="red">Estreptomicina              </font></td></tr>{% endif %}
+                        {% if primeira_cult.sut == 's' %}<tr><td><font color="green">Sulfametoxazol-treimetoprima</font></td></tr>{% elif primeira_cult.sut == 'r' %}<tr><td><font color="red">Sulfametoxazol-treimetoprima</font></td></tr>{% endif %}
+                        {% if primeira_cult.tei == 's' %}<tr><td><font color="green">Teicoplanina                </font></td></tr>{% elif primeira_cult.tei == 'r' %}<tr><td><font color="red">Teicoplanina                </font></td></tr>{% endif %}
+                        {% if primeira_cult.tet == 's' %}<tr><td><font color="green">Tetraciclina                </font></td></tr>{% elif primeira_cult.tet == 'r' %}<tr><td><font color="red">Tetraciclina                </font></td></tr>{% endif %}
+                        {% if primeira_cult.van == 's' %}<tr><td><font color="green">Vancomicina                 </font></td></tr>{% elif primeira_cult.van == 'r' %}<tr><td><font color="red">Vancomicina                 </font></td></tr>{% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+    <form class="navbar-form navbar-left"  method="get" action="{% url 'uploader:consolider' %}">
+                    <button type="submit" id="pdf" name="action" value="pdf" class="btn btn=default">Ver PDF</button>
+                    <button type="submit" id="consolida" name="action" value="consolida" class="btn btn=default">Consolida</button>
+                    <button type="submit" id="del" name="action" value="del" class="btn btn=default">Deleta</button>
+
+
+                </form>
+
+    <h1>{{ action }}</h1>
+{% else %}
+    <h3>Sem novas entradas para <strong>CONSOLIDAR</strong>.</h3>
+{% endif %}
+</div>
+
+
+
+{% endblock %}

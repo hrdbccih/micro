@@ -1,0 +1,29 @@
+{% extends 'biao/base.html' %}
+
+
+{% block extracterpdf %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+<h1>Template Extraido</h1>
+            <table border="1px">
+                <thead>
+                    <tr>
+                    {% for k,v in todas_culturas.0.items %}
+                        <th>{{ k }}</th>
+                    {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cultura in todas_culturas %}
+                <tr>
+                {% for k, v in cultura.items %}
+                    <td><font size="1">{{ v }}</font></td>
+                {% endfor %}
+                </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endblock %}

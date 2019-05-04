@@ -1,0 +1,27 @@
+{% extends 'biao/base.html' %}
+
+
+{% block consolider %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+<div class="container-fluid songs-container">
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                {{ erro }}<br>
+                    {% if erro == 'Sem novas culturas no banco de dados' %}
+                        <a href="{% url 'uploader:consolidafiles' %}">Clique aqui para realizar consolidação pendente de arquivos, se houver</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

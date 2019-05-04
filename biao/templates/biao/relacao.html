@@ -1,0 +1,91 @@
+{% extends 'biao/base.html' %}
+
+
+
+{% block relacao %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="container-fluid songs-container">
+        <div class="row">
+
+            <!-- Left Album Info -->
+            <div class="col-sm-4 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table width="320px" border="">
+                            <head>
+                                <tr>
+                                    <th>Agente</th>
+                                    <th>Isolados</th>
+                                </tr>
+                            </head>
+                            <body>
+                            {% for k,v in total.items %}
+                                <tr>
+                                    <td><a href="{% url 'biao:relacao' k %}">{{ k }}</a></td>
+                                    <td>{{ v }}</td>
+                                </tr>
+                            {% endfor %}
+                            </body>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Song Info -->
+            <div class="col-sm-8 col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        {% if agente != 'None' %}
+                        <h2><a href="{% url 'biao:agente' agente %}">{{ agente}} </a></h2>
+                        <table width="400px" border="">
+                            <thead>
+                            <tr>
+                                <th>Antibiótico</th>
+                                <th>Sensibilidade (n)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% if susceptibilidade.ami.0 != '-' and  susceptibilidade.ami.1 > 1 %}<tr><td>Amicacina                        </td><td>{{ susceptibilidade.ami.0 }} % ({{ susceptibilidade.ami.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.amp.0 != '-' and  susceptibilidade.amp.1 > 1 %}<tr><td>Ampilina                         </td><td>{{ susceptibilidade.amp.0 }} % ({{ susceptibilidade.amp.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.asb.0 != '-' and  susceptibilidade.asb.1 > 1 %}<tr><td>Ampicilina-sulbactam             </td><td>{{ susceptibilidade.asb.0 }} % ({{ susceptibilidade.asb.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.atm.0 != '-' and  susceptibilidade.atm.1 > 1 %}<tr><td>Aztreonam                        </td><td>{{ susceptibilidade.atm.0 }} % ({{ susceptibilidade.atm.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.caz.0 != '-' and  susceptibilidade.caz.1 > 1 %}<tr><td>Ceftazidima                      </td><td>{{ susceptibilidade.caz.0 }} % ({{ susceptibilidade.caz.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.cip.0 != '-' and  susceptibilidade.cip.1 > 1 %}<tr><td>Ciprofloxacino                   </td><td>{{ susceptibilidade.cip.0 }} % ({{ susceptibilidade.cip.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.cli.0 != '-' and  susceptibilidade.cli.1 > 1 %}<tr><td>Clindamicina                     </td><td>{{ susceptibilidade.cli.0 }} % ({{ susceptibilidade.cli.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.cpm.0 != '-' and  susceptibilidade.cpm.1 > 1 %}<tr><td>Cefepime                         </td><td>{{ susceptibilidade.cpm.0 }} % ({{ susceptibilidade.cpm.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.cro.0 != '-' and  susceptibilidade.cro.1 > 1 %}<tr><td>Ceftriaxone                      </td><td>{{ susceptibilidade.cro.0 }} % ({{ susceptibilidade.cro.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.ctn.0 != '-' and  susceptibilidade.ctn.1 > 1 %}<tr><td>Cefalotina                       </td><td>{{ susceptibilidade.ctn.0 }} % ({{ susceptibilidade.ctn.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.eri.0 != '-' and  susceptibilidade.eri.1 > 1 %}<tr><td>Eritromicina                     </td><td>{{ susceptibilidade.eri.0 }} % ({{ susceptibilidade.eri.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.ert.0 != '-' and  susceptibilidade.ert.1 > 1 %}<tr><td>Ertapenem                        </td><td>{{ susceptibilidade.ert.0 }} % ({{ susceptibilidade.ert.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.gen.0 != '-' and  susceptibilidade.gen.1 > 1 %}<tr><td>Gentamicina                      </td><td>{{ susceptibilidade.gen.0 }} % ({{ susceptibilidade.gen.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.imi.0 != '-' and  susceptibilidade.imi.1 > 1 %}<tr><td>Imipenem                         </td><td>{{ susceptibilidade.imi.0 }} % ({{ susceptibilidade.imi.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.lin.0 != '-' and  susceptibilidade.lin.1 > 1 %}<tr><td>Linezolina                       </td><td>{{ susceptibilidade.lin.0 }} % ({{ susceptibilidade.lin.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.mer.0 != '-' and  susceptibilidade.mer.1 > 1 %}<tr><td>Meropenem                        </td><td>{{ susceptibilidade.mer.0 }} % ({{ susceptibilidade.mer.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.nit.0 != '-' and  susceptibilidade.nit.1 > 1 %}<tr><td>Nitrofurantoina                  </td><td>{{ susceptibilidade.nit.0 }} % ({{ susceptibilidade.nit.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.nor.0 != '-' and  susceptibilidade.nor.1 > 1 %}<tr><td>Norfloxacino                     </td><td>{{ susceptibilidade.nor.0 }} % ({{ susceptibilidade.nor.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.oxa.0 != '-' and  susceptibilidade.oxa.1 > 1 %}<tr><td>Oxacilina                        </td><td>{{ susceptibilidade.oxa.0 }} % ({{ susceptibilidade.oxa.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.pen.0 != '-' and  susceptibilidade.pen.1 > 1 %}<tr><td>Penicilina                       </td><td>{{ susceptibilidade.pen.0 }} % ({{ susceptibilidade.pen.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.pol.0 != '-' and  susceptibilidade.pol.1 > 1 %}<tr><td>Polimixina                       </td><td>{{ susceptibilidade.pol.0 }} % ({{ susceptibilidade.pol.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.ppt.0 != '-' and  susceptibilidade.ppt.1 > 1 %}<tr><td>Piperacilina-tazobactam          </td><td>{{ susceptibilidade.ppt.0 }} % ({{ susceptibilidade.ppt.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.str.0 != '-' and  susceptibilidade.str.1 > 1 %}<tr><td>Estreptomicina                   </td><td>{{ susceptibilidade.str.0 }} % ({{ susceptibilidade.str.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.sut.0 != '-' and  susceptibilidade.sut.1 > 1 %}<tr><td>Smx-tmp                          </td><td>{{ susceptibilidade.sut.0 }} % ({{ susceptibilidade.sut.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.tei.0 != '-' and  susceptibilidade.tei.1 > 1 %}<tr><td>Teicoplanina                     </td><td>{{ susceptibilidade.tei.0 }} % ({{ susceptibilidade.tei.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.tet.0 != '-' and  susceptibilidade.tet.1 > 1 %}<tr><td>Tetraciclina                     </td><td>{{ susceptibilidade.tet.0 }} % ({{ susceptibilidade.tet.1 }})</td></tr>{% endif %}
+                                {% if susceptibilidade.van.0 != '-' and  susceptibilidade.van.1 > 1 %}<tr><td>Vancomicina                      </td><td>{{ susceptibilidade.van.0 }} % ({{ susceptibilidade.van.1 }})</td></tr>{% endif %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

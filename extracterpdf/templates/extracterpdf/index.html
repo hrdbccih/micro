@@ -1,0 +1,18 @@
+{% extends 'biao/base.html' %}
+
+
+{% block extracterpdf %}
+<li class="active">
+{% endblock %}
+
+
+{% block body %}
+<h1> Template Index</h1>
+<form method="POST" action="{% url 'extracterpdf:index' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+    <p>{{ field }}</p>
+    {% endfor %}
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}
