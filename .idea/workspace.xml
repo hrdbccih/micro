@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26d4e887-78b4-485d-ab7f-a494cc25e48e" name="Default Changelist" comment="" />
+    <list default="true" id="26d4e887-78b4-485d-ab7f-a494cc25e48e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,6 +201,14 @@
       <option name="presentableId" value="Default" />
       <updated>1555648872066</updated>
     </task>
+    <task id="LOCAL-00001" summary="primeiro commit do pycharm">
+      <created>1557359282868</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557359282868</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -245,6 +255,20 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="primeiro commit do pycharm" />
+    <option name="LAST_COMMIT_MESSAGE" value="primeiro commit do pycharm" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/uploader/templates/uploader/index.html">
