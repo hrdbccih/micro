@@ -71,6 +71,8 @@ def confirmer(request, pk):
                 botao = 'delete'
             if request.GET.get('action') == 'consolida':
                 botao = 'consolida'
+            if request.GET.get('action') == 'all':
+                botao = 'consolidatudo'
 
         return render(request, 'uploader/confirmer.html', {'primeira_cult': confirmavel,
                                                            'uploader':uploader,
@@ -86,6 +88,18 @@ def confirmado(request, pk):
         primeira_cult = Culturatemp.objects.get(pk=pk)
         primeira_cult.delete()
         conclusao = 'apagado'
+    elif request.GET.get('action') == 'all':
+        conclusao = 'consolidadotudo'
+        todas = Culturatemp.objects.all()
+        for primeira_cult in todas:
+            c = Cultura()
+            for field in primeira_cult._meta.fields:
+                if field.primary_key == True:
+                    continue
+                setattr(c, field.name, getattr(primeira_cult, field.name))
+            primeira_cult.delete()
+            c.save()
+        primeira_cult = None
     elif request.GET.get('action') == 'consolida':
         primeira_cult = Culturatemp.objects.get(pk=pk)
         conclusao = 'consolidado'
