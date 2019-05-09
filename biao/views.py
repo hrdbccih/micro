@@ -338,7 +338,7 @@ def limpahopsital(request):
                     pre_path_pdfs_destino = os.path.join(BASE_DIR, "static", "biao")
                     path_pdfs_destino = os.path.join(pre_path_pdfs_destino, "pdfs")
                     for filename in os.listdir(path_pdfs_destino):
-                        os.remove(filename)
+                        os.remove(os.path.join(path_pdfs_destino, filename))
                     print('APAGOU TUDO')
                     return render(request, 'biao/limpado.html', {'uploader': uploader})
                 elif request.GET.get('decisao') == 'desiste':
