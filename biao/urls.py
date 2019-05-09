@@ -5,7 +5,7 @@ app_name = 'biao'
 
 urlpatterns = [
 
-    url(r'^hrdb/$', views.hrdb, name='hrdb'),
+    url(r'^$', views.hrdb, name='hrdb'),
 
     #url(r'^register/$', views.register, name='register'),
 
@@ -13,7 +13,7 @@ urlpatterns = [
 
     url(r'^logout_user/$', views.logout_user, name='logout_user'),
 
-    url(r'^$', views.index, name='index'),
+    url(r'^index/$', views.index, name='index'),
 
     url(r'^(?P<pk>[0-9]+)/$', views.detail, name='detail'),
 
