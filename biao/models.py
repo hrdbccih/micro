@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Cultura(models.Model):
     filename = models.CharField(max_length=250)
-    nome = models.CharField(max_length=250)
+    nome = models.CharField(max_length=250, blank=True, null=True)
     prot = models.CharField(max_length=250, blank=True, null=True)
     medico = models.CharField(max_length=250, blank=True, null=True)
     data = models.DateTimeField(blank=True, null=True)
