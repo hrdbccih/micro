@@ -19,7 +19,7 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('biao/', include('biao.urls')),
+    path('', include('biao.urls')),
     path('uploader/', include('uploader.urls')),
     path('extracterpdf/', include('extracterpdf.urls'))
 
