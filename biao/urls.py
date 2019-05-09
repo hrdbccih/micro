@@ -27,4 +27,6 @@ urlpatterns = [
 
     url(r'^read/$', views.read, name='read'),
 
+    url(r'^limpahospital/$', views.limpahopsital, name='limpahospital'),
+
     ]

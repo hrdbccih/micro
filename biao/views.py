@@ -8,6 +8,8 @@ from dateutil.relativedelta import relativedelta
 from django.views.generic import View
 from .forms import UserForm
 from openpyxl import load_workbook
+import os
+from website.settings import BASE_DIR
 
 
 def index(request):
@@ -322,3 +324,27 @@ def read(request):
     uploader = request.user.groups.filter(name='Uploaders').exists()
     return render(request, 'biao/read.html', {'var1': var1,
                                               'uploader':uploader})
+
+
+def limpahopsital(request):
+    if request.user.is_authenticated:
+        uploader = request.user.groups.filter(name='Uploaders').exists()
+        if uploader:
+            print(request.method)
+            if request.method == 'GET':
+                print(request.GET.get('decisao'))
+                if request.GET.get('decisao') == 'limpa':
+                    Cultura.objects.all().delete()
+                    pre_path_pdfs_destino = os.path.join(BASE_DIR, "static", "biao")
+                    path_pdfs_destino = os.path.join(pre_path_pdfs_destino, "pdfs")
+                    for filename in os.listdir(path_pdfs_destino):
+                        os.remove(filename)
+                    print('APAGOU TUDO')
+                    return render(request, 'biao/limpado.html', {'uploader': uploader})
+                elif request.GET.get('decisao') == 'desiste':
+                    return render(request, 'biao/hrdb.html', {'uploader': uploader} )
+                else:
+                    return render(request, 'biao/limpahospital.html', {'uploader': uploader})
+            else:
+                return render(request, 'biao/limpahospital.html', {'uploader': uploader})
+    return render(request, 'biao/hrdb.html')

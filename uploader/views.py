@@ -237,9 +237,6 @@ def consolidafiles(request):
             path_pdfs_destino = os.path.join(pre_path_pdfs_destino,  "pdfs")
             #path_pdfs_destino = r"biao\static\biao\pdfs"
             n = 0
-            print(BASE_DIR)
-            print(path_pdfs)
-            print(path_pdfs_destino)
             for n, filename in enumerate(os.listdir(path_pdfs), 1):
                 origem = os.path.join(path_pdfs, filename)
                 destino = os.path.join(path_pdfs_destino, filename)

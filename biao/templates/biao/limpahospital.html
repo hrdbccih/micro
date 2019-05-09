@@ -1,0 +1,25 @@
+{% extends 'biao/base.html' %}
+
+{% block body %}
+    <div class="container-fluid songs-container">
+        <div class="row">
+
+            <div class="col-sm-4 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                    <H1>Confirma Apagar todo o Hospital?</H1>
+                        <form class="navbar-form navbar-left"  method="GET" action="{% url 'biao:limpahospital' %}">
+                            <button type="submit" id="limpa" name="decisao" value="limpa" class="btn btn=default">Confirma</button>
+                            <button type="submit" id="desiste" name="decisao" value='desiste' class="btn btn=default">Desiste</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
