@@ -37,7 +37,7 @@ def index(request):
         for filename in os.listdir(path_pdfs):
             culturas = []
             falha = None
-
+            nome = 'ignorado'
             texto_extraido = texto_extraido_de_culturas_em_pdf(filename, path_pdfs)
             texto_extraido = realiza_subs(texto_extraido)
             nome, protocolo, medico, data, unidade, coleta = cabecalho(texto_extraido)
