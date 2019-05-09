@@ -7,6 +7,7 @@ from biao.models import Cultura
 from extracterpdf.models import Destinos
 import os
 import shutil
+from website.settings import BASE_DIR
 
 
 
@@ -209,13 +210,22 @@ def read(request):
     return render(request, 'biao/hrdb_visitor.html')
 
 
+
+
 def consolidafiles(request):
     if request.user.is_authenticated:
         uploader = request.user.groups.filter(name='Uploaders').exists()
         if uploader:
-            path_pdfs = r"extracterpdf\static\pdfs_extraidos"
-            path_pdfs_destino = r"biao\static\biao\pdfs"
+            pre_path_pdfs = os.path.join(BASE_DIR, "static", "extracterpdf")
+            path_pdfs = os.path.join(pre_path_pdfs, "pdfs_extraidos")
+            #path_pdfs = r"extracterpdf\static\pdfs_extraidos"
+            pre_path_pdfs_destino = os.path.join(BASE_DIR, "static", "biao")
+            path_pdfs_destino = os.path.join(pre_path_pdfs_destino,  "pdfs")
+            #path_pdfs_destino = r"biao\static\biao\pdfs"
             n = 0
+            print(BASE_DIR)
+            print(path_pdfs)
+            print(path_pdfs_destino)
             for n, filename in enumerate(os.listdir(path_pdfs), 1):
                 origem = os.path.join(path_pdfs, filename)
                 destino = os.path.join(path_pdfs_destino, filename)

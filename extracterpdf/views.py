@@ -7,6 +7,7 @@ import PyPDF2
 import os
 import re
 from datetime import datetime
+from website.settings import BASE_DIR
 
 
 def index(request):
@@ -30,12 +31,14 @@ def index(request):
             file_instance.save()
 
         todas_culturas = []
-        path_pdfs = r"extracterpdf\static\pdfs_extraidos"
+        pre_path_pdfs = os.path.join(BASE_DIR, "static", "extracterpdf")
+        path_pdfs = os.path.join(pre_path_pdfs, "pdfs_extraidos")
+        #path_pdfs = r"extracterpdf\static\pdfs_extraidos"
         for filename in os.listdir(path_pdfs):
             culturas = []
             falha = None
 
-            texto_extraido = texto_extraido_de_culturas_em_pdf(filename)
+            texto_extraido = texto_extraido_de_culturas_em_pdf(filename, path_pdfs)
             texto_extraido = realiza_subs(texto_extraido)
             nome, protocolo, medico, data, unidade, coleta = cabecalho(texto_extraido)
             miolo_processado = processa_miolo(texto_extraido)
@@ -180,8 +183,7 @@ def extrai_antibiogramas(texto_extraido):
     return antibiogramas
 
 
-def texto_extraido_de_culturas_em_pdf(filename):
-    path_pdfs = r"extracterpdf\static\pdfs_extraidos"
+def texto_extraido_de_culturas_em_pdf(filename, path_pdfs):
     texto_extraido = None
     if filename.endswith(".pdf"):
         leitor = PyPDF2.PdfFileReader(path_pdfs + '//' + filename)
