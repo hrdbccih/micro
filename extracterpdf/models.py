@@ -2,8 +2,14 @@ from django.db import models
 import os
 from website.settings import BASE_DIR
 
-pre_path_pdfs = os.path.join(BASE_DIR, "static", "extracterpdf")
-path_pdfs = os.path.join(pre_path_pdfs, "pdfs_extraidos")
+
+#def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    #return 'user_{0}/{1}/{2}/{3}'.format(instance.user.id, filename)
+
+path = os.path.join("static", "extracterpdf" ,"pdfs_extraidos")[1:]
 
 class Destinos(models.Model):
-    pdffile = models.FileField(upload_to=path_pdfs)
+    pdffile = models.FileField(upload_to=path)
+
+
