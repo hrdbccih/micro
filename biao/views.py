@@ -182,20 +182,20 @@ def mdrs(request):
         rep_mrsa = []
         rep_kpc = []
         for item in query1:
-            if item['testes'] == 'esbl' and item['nome'] not in rep_esbl:
+            if item['testes'] == 'esbl' and item['nome'] not in rep_esbl and item['data'] is not None:
                 rep_esbl.append(item['nome'])
                 try:
                     esbl[item['data'].strftime("%b/%Y")] += 1
                 except KeyError:
                     esbl[item['data'].strftime("%b/%Y")] = 1
 
-            elif item['testes'] == 'mrsa' and item['nome'] not in rep_mrsa:
+            elif item['testes'] == 'mrsa' and item['nome'] not in rep_mrsa and item['data'] is not None:
                 rep_mrsa.append(item['nome'])
                 try:
                     mrsa[item['data'].strftime("%b/%Y")] += 1
                 except KeyError:
                     mrsa[item['data'].strftime("%b/%Y")] = 1
-            elif item['testes'] == 'kpc' and item['nome'] not in rep_kpc:
+            elif item['testes'] == 'kpc' and item['nome'] not in rep_kpc and item['data'] is not None:
                 rep_kpc.append(item['nome'])
                 try:
                     kpc[item['data'].strftime("%b/%Y")] += 1
