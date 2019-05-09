@@ -282,9 +282,13 @@ def analisa_amostras(lista_de_culturas1):
         if 'esbl' in material:
             testes = 'esbl'
         if 'hodge' in material:
-            testes = 'cre'
+            testes = 'kpc'
         if 'mrsa' in material:
             testes = 'mrsa'
+        if 'kpc' in material:
+            testes = 'kpc'
+        if 'carbapenemase' in material:
+            testes = 'kpc'
         if mat == 'cm':
             c_material = re.compile(r'material:? ?(?P<mati>.+?) ?(?=m[ée]todo|data|cerca|coleta|\n)', re.I)
             material_especifico = c_material.search(material)
