@@ -7,7 +7,7 @@ urlpatterns = [
 
     url(r'^hrdb/$', views.hrdb, name='hrdb'),
 
-    url(r'^register/$', views.register, name='register'),
+    #url(r'^register/$', views.register, name='register'),
 
     url(r'^login_user/$', views.login_user, name='login_user'),
 
